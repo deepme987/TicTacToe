@@ -41,7 +41,7 @@ def reset():
     ui.pushButton_8.setIconSize(QtCore.QSize(175, 175))
     ui.pushButton_9.setIconSize(QtCore.QSize(175, 175))
 
-    ui.label_1.setText("")
+    ui.label_1.setText("Your Turn")
 
 
 def disable():
@@ -154,6 +154,17 @@ def storeData(outcome):
              str(selected[6]), str(selected[7]), str(selected[8]), outcome])
 
 
+def resetDataSet():
+    with open('dataset.csv', mode='w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow(["chance1","chance2","chance3","chance4","chance5","chance6","chance7","chance8","chance9","outcome"])
+
+    msg = QtWidgets.QMessageBox()
+    msg.setText("Reset complete, enjoy your free wins!")
+    msg.exec()
+
+
+
 def initButtons():
     reset()
 
@@ -168,6 +179,7 @@ def initButtons():
     ui.pushButton_9.clicked.connect(lambda x: disp(ui.pushButton_9, 9) if 9 not in selected else 0)
 
     ui.pushButton_new.clicked.connect(reset)
+    ui.pushButton_reset.clicked.connect(resetDataSet)
 
 
 if __name__ == '__main__':

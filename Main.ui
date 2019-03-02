@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>921</width>
-    <height>675</height>
+    <height>647</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -150,9 +150,9 @@
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>660</x>
       <y>50</y>
-      <width>231</width>
+      <width>221</width>
       <height>101</height>
      </rect>
     </property>
@@ -165,20 +165,51 @@
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="text">
-     <string/>
+     <string>Your Turn</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_new">
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>560</y>
-      <width>91</width>
+      <y>310</y>
+      <width>221</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>New Game</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>520</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Can't win against bot?</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_reset">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>560</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset Data to play against newborn!</string>
     </property>
    </widget>
   </widget>
