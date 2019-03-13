@@ -172,7 +172,7 @@
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>310</y>
+      <y>280</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -210,6 +210,37 @@
     </property>
     <property name="text">
      <string>Reset Data to play against newborn!</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_train">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>470</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Train Bot</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>420</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Not tough enough?</string>
     </property>
    </widget>
   </widget>
