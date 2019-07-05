@@ -1,4 +1,5 @@
 
+import sys
 from PyQt5 import QtWidgets, QtGui, QtCore, uic
 import random
 import csv
@@ -8,7 +9,7 @@ train = 0
 
 
 def reset():
-    global chance, selected
+    global chance, selected, path
     chance = 0
     selected = []
 
@@ -22,15 +23,15 @@ def reset():
     ui.pushButton_8.setEnabled(True)
     ui.pushButton_9.setEnabled(True)
 
-    ui.pushButton_1.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_2.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_3.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_4.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_5.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_6.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_7.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_8.setIcon(QtGui.QIcon('def.jpg'))
-    ui.pushButton_9.setIcon(QtGui.QIcon('def.jpg'))
+    ui.pushButton_1.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_2.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_3.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_4.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_5.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_6.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_7.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_8.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_9.setIcon(QtGui.QIcon(path+'def.jpg'))
 
     ui.pushButton_1.setIconSize(QtCore.QSize(175, 175))
     ui.pushButton_2.setIconSize(QtCore.QSize(175, 175))
@@ -62,12 +63,12 @@ def disable():
 
 
 def disp(self, select):
-    global chance
+    global chance, path
 
     if chance % 2 == 0:
-        self.setIcon(QtGui.QIcon('cross.jpg'))
+        self.setIcon(QtGui.QIcon(path+'cross.jpg'))
     else:
-        self.setIcon(QtGui.QIcon('circle.jpg'))
+        self.setIcon(QtGui.QIcon(path+'circle.jpg'))
     self.setIconSize(QtCore.QSize(175, 180))
 
     chance += 1
@@ -104,7 +105,7 @@ def check():
 
 
 def playMove():
-    global selected, res, chance
+    global selected, res, chance, path
 
     p1 = [selected[i] for i in range(0, len(selected), 2)]
     p2 = [selected[i + 1] for i in range(0, len(selected) - 1, 2)]
@@ -226,9 +227,14 @@ def initButtons():
 
 
 if __name__ == '__main__':
+    if getattr(sys, 'frozen', False):
+        path = sys._MEIPASS+'\\data\\'
+    else:
+        path = 'data\\'
+
     app = QtWidgets.QApplication([])
     app.setWindowIcon(QtGui.QIcon('icon.jpg'))
-    ui = uic.loadUi("Main.ui")
+    ui = uic.loadUi(path+"GUI.ui")
 
     initButtons()
 
