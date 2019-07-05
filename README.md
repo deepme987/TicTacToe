@@ -11,7 +11,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
 **1. Clone the repository to your directory:**
 
-    git clone -https://github.com/deepme987/TicTacToe.git
+`git clone -https://github.com/deepme987/TicTacToe.git`
  
 **2. Ensure you've the required libraries:**
 
@@ -23,7 +23,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
     
 **3. Once everything is ready, launch the game using:**
 
-   `python Tic-Tac-Toe.py`
+`python Tic-Tac-Toe.py`
 	
 	
 ### Any bug reports or feedbacks are appreciated
