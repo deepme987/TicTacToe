@@ -25,5 +25,5 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
 &nbsp;&nbsp; `python Tic-Tac-Toe.py`
 	
-	
+
 ### Any bug reports or feedbacks are appreciated
