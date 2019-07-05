@@ -19,7 +19,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
 &nbsp;&nbsp; If you don't find it, install it with pip:
   
-&nbsp;&nbsp;&nbsp; `pip install PyQt5`
+&nbsp;&nbsp;&nbsp;&nbsp; `pip install PyQt5`
     
 **3. Once everything is ready, launch the game using:**
 
