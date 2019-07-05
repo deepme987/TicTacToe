@@ -22,19 +22,20 @@ Constants :-
 ============
 
     win_conditions  :   List of all possible winning situations
-    train           :   Flag for training mode
-                        True: Yes, False: No
-    flag            :   Flag for who's turn it is.
-                        True: Player 1, False: Player 2
-    chance          :   Stores move number
-    selected        :   List of all selected moves
-                        Even indices for Player 1, Odd indices for Player 2
     path            :   Directory, for freeze mode
 
 Variables :-
 ============
 
     TRAIN_ITERATIONS:   Number of iterations for training set
+    
+    train           :   Flag for training mode
+                        True: Yes, False: No
+    playerturn      :   Flag for who's turn it is.
+                        True: Player 1, False: Player 2
+    chance          :   Stores move number
+    selected        :   List of all selected moves
+                        Even indices for Player 1, Odd indices for Player 2
 
 Methods :-
 ==========
@@ -115,7 +116,7 @@ def reset():
 
 
 def disable():
-    global train, flag
+    global train, playerturn
     if not train:       # Not in training phase
         ui.pushButton_1.setEnabled(False)
         ui.pushButton_2.setEnabled(False)
@@ -127,7 +128,7 @@ def disable():
         ui.pushButton_8.setEnabled(False)
         ui.pushButton_9.setEnabled(False)
     else:
-        flag = True
+        playerturn = True
 
 
 def disp(self, select):
@@ -250,7 +251,7 @@ def storedata(outcome):
 
 
 def traindata():
-    global train, flag
+    global train, playerturn
     TRAIN_ITERATIONS = 200      # Variable for number of train sets
     reset()          # Reset board for any moves
     train = True     # Set train flag
@@ -258,9 +259,9 @@ def traindata():
     msg.setText("Training data, please wait few minutes till you get next prompt...")
     msg.exec()
     for n in range(TRAIN_ITERATIONS):
-        flag = False
+        playerturn = False
         for i in range(5):
-            if not flag:
+            if not playerturn:
                 x = playMove()
                 exec("disp(ui.pushButton_%d, %d)" % (x, x))
         reset()
