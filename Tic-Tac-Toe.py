@@ -48,7 +48,7 @@ Methods :-
                         with itself for N_ITERATIONS finding new moves
     storedata       :   Stores the current set of moves with outcome to dataset.csv
     resetdata       :   Clears all data history making the AI dumb
-    disable         :   Temporarily lock down all buttons during training phase
+    disable         :   Temporarily lock down all buttons after successful outcome
     reset           :   Resets current board and re-initializes variables
     
     
@@ -70,14 +70,14 @@ import random
 import csv
 
 win_conditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
-train = False
-path = 'data\\'
+train = False       # Play mode
+path = 'data\\'     # Path for dependencies
 
 
 def reset():
     global chance, selected
-    chance = 0
-    selected = []
+    chance = 0      # Move number
+    selected = []   # Moves played
 
     ui.pushButton_1.setEnabled(True)
     ui.pushButton_2.setEnabled(True)
@@ -114,7 +114,7 @@ def reset():
 
 def disable():
     global train, flag
-    if not train:
+    if not train:       # Not in training phase
         ui.pushButton_1.setEnabled(False)
         ui.pushButton_2.setEnabled(False)
         ui.pushButton_3.setEnabled(False)
@@ -162,10 +162,10 @@ def check():
 
     if len(selected) == 9:
         ui.label_1.setText("Draw!")
-        storedata("D")
+        storedata("D")                  # Draw situation
         return
 
-    if chance % 2 == 1:
+    if chance % 2 == 1:     # Bot to play
         x = playMove()
         exec("disp(ui.pushButton_%d, %d)" % (x, x))
 
@@ -180,6 +180,8 @@ def playMove():
     if k == 99:
         k = testlose(p1, p2)    # Find Force Move
         if k == 99:
+            # No win/force move, find best move from dataset
+
             avail = [x for x in [1, 2, 3, 4, 5, 6, 7, 8, 9] if x not in selected]
             move_res = {x: 0 for x in avail}                # dictionary with all moves and outcome probability
 
@@ -188,7 +190,7 @@ def playMove():
                 line_count = 0
 
                 for row in csv_reader:
-                    if line_count == 0:     # Ignore header
+                    if line_count == 0:         # Ignore header
                         line_count += 1
                         continue
 
