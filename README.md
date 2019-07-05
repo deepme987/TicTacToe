@@ -5,7 +5,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
 
 ### Under Development:
- MinMax approach to find optimal move every time instead of relying on dataset.
+ MinMax approach to find optimal move using Brute Force instead of utilizing dataset that can be tricked into.
 	
 ### How to play:
 
