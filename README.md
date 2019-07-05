@@ -18,9 +18,11 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
   To check, type `pip freeze` in cmd and look for `PyQt5==5.12.3` (version may vary)
 
   If you don't find it, install it with pip:
+  
 		`pip install PyQt5`
     
 3. Once everything is ready, launch the game using:
+
   `python Tic-Tac-Toe.py`
 	
 	
