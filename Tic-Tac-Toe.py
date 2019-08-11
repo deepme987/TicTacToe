@@ -28,7 +28,7 @@ Variables :-
 ============
 
     TRAIN_ITERATIONS:   Number of iterations for training set
-    
+
     train           :   Flag for training mode
                         True: Yes, False: No
     playerturn      :   Flag for who's turn it is.
@@ -68,11 +68,12 @@ Dependencies :-
 """
 
 import sys
-from PyQt5 import QtWidgets, QtGui, QtCore, uic
-import random
 import csv
+import random
+from PyQt5 import QtWidgets, QtGui, QtCore, uic
 
-win_conditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+win_conditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7],
+                  [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 train = False       # Play mode
 path = 'data\\'     # Path for dependencies
 
