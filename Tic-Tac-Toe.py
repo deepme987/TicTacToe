@@ -22,7 +22,7 @@ Constants :-
 ============
 
     win_conditions  :   List of all possible winning situations
-    path            :   Directory, for freeze mode
+    PATH            :   Directory, for freeze mode
 
 Variables :-
 ============
@@ -31,7 +31,7 @@ Variables :-
 
     train           :   Flag for training mode
                         True: Yes, False: No
-    playerturn      :   Flag for who's turn it is.
+    PLAYER_TURN      :   Flag for who's turn it is.
                         True: Player 1, False: Player 2
     chance          :   Stores move number
     selected        :   List of all selected moves
@@ -39,32 +39,32 @@ Variables :-
 
 Methods :-
 ==========
-    
-    initbuttons     :   Connect all python methods with .ui file
+
+    init_buttons     :   Connect all python methods with .ui file
     disp            :   Places the appropriate move image (cross/ circle),
                         adds move to selected and checks current board state
     check           :   Analyzes current board state for outcome
-    playmove        :   Finds the most winning move based on prior knowledge
-    testlose        :   Helper function for playmove to play a move if next move
+    play_move        :   Finds the most winning move based on prior knowledge
+    test_lose        :   Helper function for play_move to play a move if next move
                         stops a lose or is a guaranteed win
-    traindata       :   Enters training mode where the bot is allowed to play
+    train_data       :   Enters training mode where the bot is allowed to play
                         with itself for N_ITERATIONS finding new moves
-    storedata       :   Stores the current set of moves with outcome to dataset.csv
-    resetdata       :   Clears all data history making the AI dumb
+    store_data       :   Stores the current set of moves with outcome to dataset.csv
+    reset_data       :   Clears all data history making the AI dumb
     disable         :   Temporarily lock down all buttons after successful outcome
     reset           :   Resets current board and re-initializes variables
-    
-    
+
+
 Dependencies :-
 ===============
-    
+
     dataset.csv     :   Labelled history of moves played
     GUI.ui          :   ui format of GUI used loaded in variable "ui"
     cross.jpg       :   Player 1 move
     circle.jpg      :   Player 2 move
     def.jps         :   White tile of same size as cross/circle
     icon            :   Window icon for the application
-    
+
 """
 
 import sys
@@ -75,7 +75,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore, uic
 win_conditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7],
                   [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 train = False       # Play mode
-path = 'data\\'     # Path for dependencies
+PATH = 'data\\'     # PATH for dependencies
 
 
 def reset():
@@ -93,15 +93,15 @@ def reset():
     ui.pushButton_8.setEnabled(True)
     ui.pushButton_9.setEnabled(True)
 
-    ui.pushButton_1.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_2.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_3.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_4.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_5.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_6.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_7.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_8.setIcon(QtGui.QIcon(path+'def.jpg'))
-    ui.pushButton_9.setIcon(QtGui.QIcon(path+'def.jpg'))
+    ui.pushButton_1.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_2.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_3.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_4.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_5.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_6.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_7.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_8.setIcon(QtGui.QIcon(PATH+'def.jpg'))
+    ui.pushButton_9.setIcon(QtGui.QIcon(PATH+'def.jpg'))
 
     ui.pushButton_1.setIconSize(QtCore.QSize(175, 175))
     ui.pushButton_2.setIconSize(QtCore.QSize(175, 175))
@@ -117,7 +117,7 @@ def reset():
 
 
 def disable():
-    global train, playerturn
+    global train, PLAYER_TURN
     if not train:       # Not in training phase
         ui.pushButton_1.setEnabled(False)
         ui.pushButton_2.setEnabled(False)
@@ -129,65 +129,65 @@ def disable():
         ui.pushButton_8.setEnabled(False)
         ui.pushButton_9.setEnabled(False)
     else:
-        playerturn = True
+        PLAYER_TURN = True
 
 
 def disp(self, select):
     global chance
 
     if chance % 2 == 0:             # Player 1
-        self.setIcon(QtGui.QIcon(path+'cross.jpg'))
+        self.setIcon(QtGui.QIcon(PATH+'cross.jpg'))
     else:                           # Player 2
-        self.setIcon(QtGui.QIcon(path+'circle.jpg'))
+        self.setIcon(QtGui.QIcon(PATH+'circle.jpg'))
     self.setIconSize(QtCore.QSize(175, 180))
 
     chance += 1
     selected.append(select)
     check()
-    
+
 
 def check():
     global selected, win_conditions, chance
 
-    p1 = [selected[i] for i in range(0, len(selected), 2)]      # Player 1 moves
-    p2 = [selected[i+1] for i in range(0, len(selected)-1, 2)]  # Player 2 moves
+    player_1 = [selected[i] for i in range(0, len(selected), 2)]      # Player 1 moves
+    player_2 = [selected[i+1] for i in range(0, len(selected)-1, 2)]  # Player 2 moves
 
     for x in win_conditions:
-        if set(p1) >= set(x):
+        if set(player_1) >= set(x):
             ui.label_1.setText("Player 1 Wins!")
-            storedata("L")              # Bot loses
+            store_data("L")              # Bot loses
             disable()
             return
-        elif set(p2) >= set(x):
+        elif set(player_2) >= set(x):
             ui.label_1.setText("Player 2 Wins!")
-            storedata("W")              # Bot wins
+            store_data("W")              # Bot wins
             disable()
             return
 
     if len(selected) == 9:
         ui.label_1.setText("Draw!")
-        storedata("D")                  # Draw situation
+        store_data("D")                  # Draw situation
         return
 
     if chance % 2 == 1:     # Bot to play
-        x = playMove()
+        x = play_move()
         exec("disp(ui.pushButton_%d, %d)" % (x, x))
 
 
-def playMove():
-    global selected, win_conditions, chance, path
+def play_move():
+    global selected, win_conditions, chance, PATH
 
-    p1 = [selected[i] for i in range(0, len(selected), 2)]
-    p2 = [selected[i + 1] for i in range(0, len(selected) - 1, 2)]
+    player_1 = [selected[i] for i in range(0, len(selected), 2)]
+    player_2 = [selected[i + 1] for i in range(0, len(selected) - 1, 2)]
 
-    k = testlose(p2, p1)        # Find Win Move
+    k = test_lose(player_2, player_1)        # Find Win Move
     if k == 99:
-        k = testlose(p1, p2)    # Find Force Move
+        k = test_lose(player_1, player_2)    # Find Force Move
         if k == 99:
             # No win/force move, find best move from dataset
 
             avail = [x for x in [1, 2, 3, 4, 5, 6, 7, 8, 9] if x not in selected]
-            move_res = {x: 0 for x in avail}                # dictionary with all moves and outcome probability
+            move_res = {x: 0 for x in avail}  # dictionary with all moves and outcome probability
 
             with open('dataset.csv', mode='r') as csv_file:
                 csv_reader = csv.reader(csv_file)
@@ -215,10 +215,12 @@ def playMove():
                     else:
                         move_res[random.choice(avail)] -= 0.5
 
-            if chance % 2 == 0: # Player 1
-                move_avail = [x for x in move_res if move_res[x] == move_res[max(move_res, key=move_res.get)]]  # max
+            if chance % 2 == 0:  # Player 1
+                move_avail = [x for x in move_res
+                              if move_res[x] == move_res[max(move_res, key=move_res.get)]]  # max
             else:               # Player 2
-                move_avail = [x for x in move_res if move_res[x] == move_res[min(move_res, key=move_res.get)]]  # min
+                move_avail = [x for x in move_res
+                              if move_res[x] == move_res[min(move_res, key=move_res.get)]]  # min
             x = random.choice(move_avail)
 
             # x = max(move_res, key=move_res.get)
@@ -230,17 +232,17 @@ def playMove():
     return x
 
 
-def testlose(p1, p2):
+def test_lose(player_1, player_2):
     global selected
 
     for x in win_conditions:
-        if len(set(x)-set(p1)) < 2 and list(set(x) - set(p1))[0] not in p2:    # Check if next move is win/ force
-            return list(set(x) - set(p1))[0]
+        if len(set(x)-set(player_1)) < 2 and list(set(x) - set(player_1))[0] not in player_2:    # Check if next move is win/ force
+            return list(set(x) - set(player_1))[0]
 
     return 99
 
 
-def storedata(outcome):
+def store_data(outcome):
     global selected
     with open('dataset.csv', mode='a', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -251,27 +253,28 @@ def storedata(outcome):
              str(selected[5]), str(selected[6]), str(selected[7]), str(selected[8]), outcome])
 
 
-def traindata():
-    global train, playerturn
-    TRAIN_ITERATIONS = 200      # Variable for number of train sets
+def train_data():
+    global train, PLAYER_TURN
+    train_iterations = 200      # Variable for number of train sets
     reset()          # Reset board for any moves
     train = True     # Set train flag
     msg = QtWidgets.QMessageBox()
     msg.setText("Training data, please wait few minutes till you get next prompt...")
     msg.exec()
-    for n in range(TRAIN_ITERATIONS):
-        playerturn = False
-        for i in range(5):
-            if not playerturn:
-                x = playMove()
-                exec("disp(ui.pushButton_%d, %d)" % (x, x))
+    for _ in range(train_iterations):
+        PLAYER_TURN = False
+        for _ in range(5):
+            if not PLAYER_TURN:
+                move = play_move()
+                # exec("disp(ui.pushButton_%d, %d)" % (x, x))
+                __ = getattr(disp, f'ui.pushButton_{move}, {move}')
         reset()
     msg.setText("Trained Successfully!")
     msg.exec()
     train = False   # Reset train flag
 
 
-def resetdata():
+def reset_data():
     with open('dataset.csv', mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(["chance1", "chance2", "chance3", "chance4", "chance5",
@@ -282,7 +285,7 @@ def resetdata():
     msg.exec()
 
 
-def initbuttons():
+def init_buttons():
     reset()
 
     ui.pushButton_1.clicked.connect(lambda x: disp(ui.pushButton_1, 1) if 1 not in selected else 0)
@@ -296,19 +299,19 @@ def initbuttons():
     ui.pushButton_9.clicked.connect(lambda x: disp(ui.pushButton_9, 9) if 9 not in selected else 0)
 
     ui.pushButton_new.clicked.connect(reset)
-    ui.pushButton_train.clicked.connect(traindata)
-    ui.pushButton_reset.clicked.connect(resetdata)
+    ui.pushButton_train.clicked.connect(train_data)
+    ui.pushButton_reset.clicked.connect(reset_data)
 
 
 if __name__ == '__main__':
     if getattr(sys, 'frozen', False):
-        path = sys._MEIPASS+'\\data\\'
+        PATH = sys._MEIPASS+'\\data\\'
 
     app = QtWidgets.QApplication([])
     app.setWindowIcon(QtGui.QIcon('icon.jpg'))
-    ui = uic.loadUi(path+"GUI.ui")
+    ui = uic.loadUi(PATH+"GUI.ui")
 
-    initbuttons()
+    init_buttons()
 
     ui.show()
     app.exec()
