@@ -3,9 +3,9 @@
 Tic Tac Toe is  is a paper-and-pencil game for two players, X and O, who take turns marking the spaces in a 3×3 grid.
 The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
 
-***Find the demo video [here](https://github.com/deepme987/TicTacToe/blob/master/Demo.mp4)***
+***Find the demo video [here](https://github.com/deepme987/TicTacToe/blob/master/Demos/Demo.mp4)***
 
-![](Demo.gif)
+![](Demos/Demo.gif)
 
 
 ### Under Development:

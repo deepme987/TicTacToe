@@ -189,7 +189,7 @@ def play_move():
             avail = [x for x in [1, 2, 3, 4, 5, 6, 7, 8, 9] if x not in selected]
             move_res = {x: 0 for x in avail}  # dictionary with all moves and outcome probability
 
-            with open('dataset.csv', mode='r') as csv_file:
+            with open('data/dataset.csv', mode='r') as csv_file:
                 csv_reader = csv.reader(csv_file)
                 line_count = 0
 
@@ -244,7 +244,7 @@ def test_lose(player_1, player_2):
 
 def store_data(outcome):
     global selected
-    with open('dataset.csv', mode='a', newline='') as csv_file:
+    with open('data/dataset.csv', mode='a', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         for i in range(9 - len(selected)):
             selected.append(0)
@@ -275,7 +275,7 @@ def train_data():
 
 
 def reset_data():
-    with open('dataset.csv', mode='w', newline='') as csv_file:
+    with open('data/dataset.csv', mode='w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(["chance1", "chance2", "chance3", "chance4", "chance5",
                              "chance6", "chance7", "chance8", "chance9", "outcome"])
