@@ -5,7 +5,7 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
 ***Find the demo video [here](https://github.com/deepme987/TicTacToe/blob/master/Demo.mp4)***
 
-![](name-of-giphy.gif)
+![](Demo.gif)
 
 
 ### Under Development:
